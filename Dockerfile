@@ -7,7 +7,7 @@ RUN set -eux \
 	&& sed -i.bak 's/enabled=0/enabled=1/' /etc/yum.repos.d/Rocky-PowerTools.repo
 
 RUN set -eux \
-	&& microdnf install -y java-17-openjdk-headless git python39 podman-docker
+	&& microdnf install -y java-17-openjdk-headless git python39 podman-docker jq
 
 RUN set -eux \
-	&& pip3 install --no-cache virtualenv
+	&& pip3 install --no-cache virtualenv yq
