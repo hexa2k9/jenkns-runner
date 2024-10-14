@@ -1,13 +1,13 @@
 FROM rockylinux:8-minimal
 
 RUN set -eux \
-	&& microdnf update \
+	&& microdnf update --nodocs \
 	&& microdnf module enable python39 \
-	&& microdnf install -y epel-release \
+	&& microdnf install --nodocs -y epel-release \
 	&& sed -i.bak 's/enabled=0/enabled=1/' /etc/yum.repos.d/Rocky-PowerTools.repo
 
 RUN set -eux \
-	&& microdnf install -y java-17-openjdk-headless git python39 podman-docker jq bind-utils netcat nmap
+	&& microdnf install --nodocs -y java-17-openjdk-headless git python39 podman-docker jq bind-utils netcat nmap
 
 RUN set -eux \
 	&& pip3 install --no-cache virtualenv yq
