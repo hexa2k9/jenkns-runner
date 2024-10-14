@@ -3,7 +3,7 @@ FROM rockylinux:8-minimal
 RUN set -eux \
 	&& microdnf update --nodocs \
 	&& microdnf module enable python39 \
-	&& microdnf install --nodocs -y epel-release \
+	&& microdnf install --nodocs -y epel-release
 
 RUN set -eux \
 	&& microdnf install --nodocs --enablerepo=powertools -y java-17-openjdk-headless git python39 podman-docker jq bind-utils netcat nmap
