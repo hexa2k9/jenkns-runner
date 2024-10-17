@@ -6,7 +6,10 @@ RUN set -eux \
 	&& microdnf install --nodocs -y epel-release
 
 RUN set -eux \
-	&& microdnf install --nodocs --enablerepo=powertools -y java-17-openjdk-headless git python3.11 python3.11-pip podman-docker jq bind-utils netcat nmap
+	&& curl -sS -L -o /etc/yum.repos.d/vault.repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+
+RUN set -eux \
+	&& microdnf install --nodocs --enablerepo=powertools -y java-17-openjdk-headless git python3.11 python3.11-pip podman-docker jq bind-utils netcat nmap vault
 
 RUN set -eux \
 	&& pip3.11 install --no-cache virtualenv yq
