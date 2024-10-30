@@ -14,4 +14,4 @@ RUN set -eux \
 	&& microdnf --nodocs --enablerepo=crb -y install java-17-openjdk-headless git python3.11 python3.11-pip podman-docker jq bind-utils netcat nmap openssh
 
 RUN set -eux \
-	&& pip3.11 install --no-cache virtualenv yq
+	&& pip3.11 install --break-system-packages --no-cache virtualenv yq
