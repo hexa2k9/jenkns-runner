@@ -1,0 +1,23 @@
+FROM alpine:3.20
+
+RUN set -eux \
+    && apk add --no-cache \
+        jq \
+        git \
+        curl \
+        nmap \
+        unzip \
+        openssh \
+        python3 \
+        py3-pip \
+        yq-python \
+        py3-virtualenv \
+        netcat-openbsd \
+        openjdk17-jre-headless
+
+ENV VAULT_VERSION=1.18.1
+RUN set -eux \
+    && curl -sS -o /tmp/vault.zip https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_arm64.zip \
+    && unzip /tmp/vault.zip vault \
+    && mv vault /usr/local/bin/vault \
+    && rm -fv /tmp/vault.zip
