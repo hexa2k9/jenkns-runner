@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM alpine:3.21
 
 RUN set -eux \
     && apk upgrade --no-cache \
@@ -16,7 +16,7 @@ RUN set -eux \
         netcat-openbsd \
         openjdk17-jre-headless
 
-ENV VAULT_VERSION=1.18.1
+ENV VAULT_VERSION=1.18.2
 RUN set -eux \
     && curl -sS -o /tmp/vault.zip https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_arm64.zip \
     && unzip /tmp/vault.zip vault \
