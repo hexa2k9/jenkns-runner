@@ -19,6 +19,18 @@ jobs:
       packages: write
       id-token: write
 
+    strategy:
+      matrix:
+        include:
+        - tag: "8"
+          file: "Dockerfile.8"
+        - tag: "9"
+          file: "Dockerfile.9"
+        - tag: "alpine"
+          file: "Dockerfile.alpine"
+        - tag: "docker"
+          file: "Dockerfile.docker"
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -40,42 +52,12 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Build Rocky Linux 8 Runner
-        id: runner-rocky8
+      - name: Build Runner
+        id: build-and-push
         uses: docker/build-push-action@48aba3b46d1b1fec4febb7c5d0c644b249a11355 # v6.10.0
         with:
-          file: Dockerfile.8
+          file: ${{ matrix.file }}
           platforms: linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:8
-          labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Build Rocky Linux 9 Runner
-        id: runner-rocky9
-        uses: docker/build-push-action@48aba3b46d1b1fec4febb7c5d0c644b249a11355 # v6.10.0
-        with:
-          file: Dockerfile.9
-          platforms: linux/arm64
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:9
-          labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Build Alpine Linux Runner
-        id: runner-alpine
-        uses: docker/build-push-action@48aba3b46d1b1fec4febb7c5d0c644b249a11355 # v6.10.0
-        with:
-          file: Dockerfile.alpine
-          platforms: linux/arm64
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:alpine
-          labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Build Docker Runner
-        id: runner-docker
-        uses: docker/build-push-action@48aba3b46d1b1fec4febb7c5d0c644b249a11355 # v6.10.0
-        with:
-          file: Dockerfile.docker
-          platforms: linux/arm64
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:docker
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.file }}
           labels: ${{ steps.meta.outputs.labels }}
