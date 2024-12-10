@@ -1,6 +1,8 @@
 name: Docker
 
 on:
+  schedule:
+    - cron: "0 5 * * 5"
   push:
     branches: [ "main" ]
   pull_request:
@@ -22,14 +24,10 @@ jobs:
     strategy:
       matrix:
         include:
-        - tag: "8"
-          file: "Dockerfile.8"
-        - tag: "9"
-          file: "Dockerfile.9"
-        - tag: "alpine"
-          file: "Dockerfile.alpine"
-        - tag: "docker"
-          file: "Dockerfile.docker"
+          - tag: "8"
+          - tag: "9"
+          - tag: "alpine"
+          - tag: "docker"
 
     steps:
       - name: Checkout repository
@@ -56,7 +54,7 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@48aba3b46d1b1fec4febb7c5d0c644b249a11355 # v6.10.0
         with:
-          file: ${{ matrix.file }}
+          file: Dockerfile.${{ matrix.tag }}
           platforms: linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.tag }}
