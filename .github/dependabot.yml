@@ -7,3 +7,10 @@ updates:
       interval: "daily"
     assignees:
       - "hexa2k9"
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      time: "06:00"
+      interval: "daily"
+    assignees:
+      - "hexa2k9"
