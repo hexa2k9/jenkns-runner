@@ -14,3 +14,6 @@ updates:
       interval: "daily"
     assignees:
       - "hexa2k9"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
