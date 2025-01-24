@@ -9,12 +9,15 @@ RUN set -eux \
         curl \
         nmap \
         unzip \
+        gcompat \
         openssh \
         python3 \
         py3-pip \
         yq-python \
         alpine-sdk \
         build-base \
+        python3-dev \
         py3-virtualenv \
         netcat-openbsd \
+        lsb-release-minimal \
         openjdk17-jre-headless
