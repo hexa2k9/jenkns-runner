@@ -1,0 +1,30 @@
+FROM ghcr.io/jqlang/jq:1.7.1 AS jq
+FROM alpine:3.21 AS build
+
+ENV CURL_VERSION="8.12.1"
+
+ENV CC="clang"
+ENV LDFLAGS="-static"
+ENV PKG_CONFIG="pkg-config --static"
+
+WORKDIR /build
+
+RUN set -eux \
+  && apk add build-base clang openssl-dev nghttp2-dev nghttp2-static libssh2-dev libssh2-static perl openssl-libs-static zlib-static \
+  && wget https://curl.haxx.se/download/curl-${CURL_VERSION}.tar.gz \
+  && tar xzf curl-${CURL_VERSION}.tar.gz \
+  && cd curl-${CURL_VERSION}/ \
+  && ./configure --disable-shared --enable-static --disable-ldap --enable-ipv6 --enable-unix-sockets --enable-websockets --with-ssl --with-libssh2 --disable-docs --disable-manual --without-libpsl \
+  && make -j4 V=1 LDFLAGS="-static -all-static" \
+  && mv src/curl /build \
+  && strip /build/curl
+
+FROM scratch
+
+COPY --from=jq /jq /jq
+COPY --from=build /build/curl /curl
+
+ENV PATH=/
+
+ENTRYPOINT ["/curl"]
+CMD ["--version"]

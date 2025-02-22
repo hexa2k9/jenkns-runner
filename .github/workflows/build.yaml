@@ -27,6 +27,7 @@ jobs:
           - tag: "8"
           - tag: "9"
           - tag: "alpine"
+          - tag: "curl"
           - tag: "docker"
 
     steps:
