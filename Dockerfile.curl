@@ -1,7 +1,7 @@
 FROM ghcr.io/jqlang/jq:1.7.1 AS jq
 FROM alpine:3.21 AS build
 
-ENV CURL_VERSION="8.12.1"
+ENV CURL_VERSION="8.13.0"
 
 ENV CC="clang"
 ENV LDFLAGS="-static"
