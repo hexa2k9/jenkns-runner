@@ -1,0 +1,20 @@
+FROM rockylinux/rockylinux:10-minimal
+
+RUN set -eux \
+    && microdnf --nodocs -y update \
+    && microdnf --nodocs -y install epel-release unzip
+
+ENV VAULT_VERSION="1.20.0"
+ARG TARGETPLATFORM
+RUN set -eux \
+    && curl -sS -L -o /tmp/vault.zip https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_$(echo ${TARGETPLATFORM} | sed 's#/#_#').zip \
+    && unzip -d /usr/bin /tmp/vault.zip
+#    && microdnf install --nodocs -y vault \
+#    && setcap -r /usr/bin/vault \
+#    && microdnf reinstall --nodocs -y vault
+
+RUN set -eux \
+    && microdnf --nodocs --enablerepo=crb -y install java-21-openjdk-headless git python3.12 python3.12-pip podman-docker jq bind-utils netcat nmap openssh
+
+RUN set -eux \
+    && pip3.12 install --no-cache virtualenv yq
