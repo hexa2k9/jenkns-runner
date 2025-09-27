@@ -14,4 +14,4 @@ RUN set -eux \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-ENTRYPOINT [ "/bin/bash" ]
+ENTRYPOINT [ "/usr/bin/bash" ]
