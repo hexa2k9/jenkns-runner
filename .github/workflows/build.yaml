@@ -30,6 +30,7 @@ jobs:
           - tag: "alpine"
           - tag: "curl"
           - tag: "docker"
+          - tag: "esphome"
 
     steps:
       - name: Checkout repository
