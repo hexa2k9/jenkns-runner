@@ -2,4 +2,4 @@ FROM docker:cli
 
 RUN set -eux \
     && apk upgrade --no-cache \
-    && apk add --no-cache openjdk17-jre
+    && apk add --no-cache openjdk21-jre
