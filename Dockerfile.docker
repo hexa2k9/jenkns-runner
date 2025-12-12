@@ -1,4 +1,4 @@
-FROM docker:cli
+FROM docker:29.1.2-cli-alpine3.22
 
 RUN set -eux \
     && apk upgrade --no-cache \
