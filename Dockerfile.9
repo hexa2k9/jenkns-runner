@@ -3,7 +3,7 @@ FROM rockylinux/rockylinux:9-minimal
 RUN set -eux \
     && microdnf --nodocs -y update \
     && microdnf --nodocs -y install epel-release \
-    && microdnf --nodocs --enablerepo=crb -y install java-17-openjdk-headless git python3.11 python3.11-pip podman-docker jq bind-utils netcat nmap openssh unzip
+    && microdnf --nodocs --enablerepo=crb -y install java-17-openjdk-headless git python3.11 python3.11-pip podman-docker jq bind-utils netcat nmap openssh unzip rsync
 
 ARG TARGETPLATFORM
 RUN set -eux \

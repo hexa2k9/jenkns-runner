@@ -4,7 +4,7 @@ RUN set -eux \
     && microdnf update --nodocs \
     && microdnf module enable python39 \
     && microdnf install --nodocs -y epel-release \
-    && microdnf install --nodocs --enablerepo=powertools -y java-17-openjdk-headless git python3.11 python3.11-pip podman-docker jq bind-utils netcat openssh unzip
+    && microdnf install --nodocs --enablerepo=powertools -y java-17-openjdk-headless git python3.11 python3.11-pip podman-docker jq bind-utils netcat openssh unzip rsync
 
 ARG TARGETPLATFORM
 RUN set -eux \
