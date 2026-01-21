@@ -15,5 +15,5 @@ updates:
     assignees:
       - "hexa2k9"
     ignore:
-      - dependency-name: "*"
+      - dependency-name: "rockylinux/rockylinux"
         update-types: ["version-update:semver-major"]
