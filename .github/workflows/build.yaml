@@ -28,7 +28,7 @@ jobs:
           - tag: "9"
           - tag: "10"
           - tag: "alpine"
-          - tag: "curl"
+#          - tag: "curl"
           - tag: "docker"
           - tag: "esphome"
 
