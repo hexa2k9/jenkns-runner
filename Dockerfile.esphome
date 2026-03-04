@@ -1,4 +1,4 @@
-FROM ghcr.io/esphome/esphome:2026.2.3
+FROM ghcr.io/esphome/esphome:2026.2.4
 
 
 RUN set -eux \
