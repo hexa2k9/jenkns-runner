@@ -1,4 +1,4 @@
-FROM ghcr.io/jqlang/jq:1.8.1 AS jq
+FROM ghcr.io/jqlang/jq:1.8.2 AS jq
 FROM alpine:3.24 AS build
 
 ENV CURL_VERSION="8.18.0"
