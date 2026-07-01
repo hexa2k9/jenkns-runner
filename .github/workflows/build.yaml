@@ -31,6 +31,7 @@ jobs:
 #          - tag: "curl"
           - tag: "docker"
           - tag: "esphome"
+          - tag: "python"
 
     steps:
       - name: Checkout repository

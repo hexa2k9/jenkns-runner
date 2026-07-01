@@ -1,0 +1,18 @@
+FROM python:3.13-alpine
+
+RUN set -eux \
+    && apk upgrade --no-cache \
+    && apk add --no-cache \
+        jq \
+        git \
+        bash \
+        curl \
+        nmap \
+        unzip \
+        gcompat \
+        openssh \
+        alpine-sdk \
+        build-base \
+        netcat-openbsd \
+        lsb-release-minimal \
+        openjdk21-jre-headless
